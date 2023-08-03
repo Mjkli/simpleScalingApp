@@ -52,8 +52,8 @@ resource "aws_lb_target_group" "lb_tg" {
 
 }
 
-resource "aws_lb_target_group_attachment" "lb_tg_attach" {
-    target_group_arn = aws_lb_target_group.lb_tg.arn
-    target_id = aws_autoscaling_group.api_asg.id
-    port = 80
-}
+# resource "aws_lb_target_group_attachment" "lb_tg_attach" {
+#     target_group_arn = aws_lb_target_group.lb_tg.arn
+#     target_id = aws_autoscaling_group.api_asg.id
+#     port = 80
+# }

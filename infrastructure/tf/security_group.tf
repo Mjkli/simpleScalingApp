@@ -1,7 +1,7 @@
 resource "aws_security_group" "allow_http"{
     name = "allow_http"
     description = "Allows public access to the loadbalancer"
-    vpc_id = "aws_vpc.main-vpc.id"
+    vpc_id = aws_vpc.main-vpc.id
 
     ingress {
         description = "HTTP from VPC"
