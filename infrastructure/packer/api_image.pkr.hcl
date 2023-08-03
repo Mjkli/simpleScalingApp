@@ -33,7 +33,7 @@ build {
   ]
   provisioner "file" {
     source = "../../api/main.py"
-    destination = "/tmp"
+    destination = "/tmp/main.py"
   }
 
   provisioner "shell"{
@@ -44,6 +44,5 @@ build {
       "sudo apt-get install python3-pip -y",
       "sudo pip install flask"
       ]
-
   }
 }
