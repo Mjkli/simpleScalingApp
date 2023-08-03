@@ -4,12 +4,20 @@ resource "aws_launch_template" "api_template" {
     instance_type = "t2.micro"
 }
 
+resource "aws_placement_group" "asg_pg" {
+    name = "asgPG"
+    strategy = "cluster"
+}
+
 
 resource "aws_autoscaling_group" "api_asg" {
-    availability_zones = ["us-west-1a"]
+    availability_zones = ["us-west-1a","us-west-1b"]
     desired_capacity = 1
     min_size = 1
     max_size = 3
+    force_delete = true
+    placement_group = aws_placement_group.asg_pg.id
+    vpc_zone_identifier = [aws_subnet.subnet-1.id, aws_subnet.subnet-2.id]
 
     launch_template {
         id = aws_launch_template.api_template.id

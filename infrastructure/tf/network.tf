@@ -35,7 +35,7 @@ resource "aws_lb" "main_lb" {
     internal = false
     load_balancer_type = "application"
     security_groups = [aws_security_group.allow_http.id]
-    subnets = [aws_subnet.subnet-1.id]
+    subnets = [aws_subnet.subnet-1.id, aws_subnet.subnet-2.id]
 
     tags = {
         Name = "main_lb"
