@@ -33,7 +33,7 @@ build {
   ]
   provisioner "file" {
     source = "../../api/main.py"
-    destination = "/"
+    destination = "/tmp"
   }
 
   provisioner "shell"{
