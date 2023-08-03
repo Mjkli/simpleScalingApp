@@ -8,7 +8,7 @@ packer {
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "ssa-api"
+  ami_name      = "ssa-api-2"
   instance_type = "t2.micro"
   region        = "us-west-1"
   source_ami_filter {
