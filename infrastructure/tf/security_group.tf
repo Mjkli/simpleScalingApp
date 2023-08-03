@@ -34,7 +34,7 @@ resource "aws_security_group" "allow_lb" {
         from_port = 80
         to_port = 80
         protocol = "TCP"
-        prefix_list_ids = [aws_lb.main_lb.id]
+        security_groups = [aws_security_group.allow_http.id]
     }
 
     egress {

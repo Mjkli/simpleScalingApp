@@ -61,7 +61,6 @@ resource "aws_lb_listener" "lb_listener" {
 
 }
 
-
 resource "aws_lb_target_group" "lb_tg" {
     name = "ssaLBtg"
     port = "80"
@@ -69,9 +68,3 @@ resource "aws_lb_target_group" "lb_tg" {
     vpc_id = aws_vpc.main-vpc.id
 
 }
-
-# resource "aws_lb_target_group_attachment" "lb_tg_attach" {
-#     target_group_arn = aws_lb_target_group.lb_tg.arn
-#     target_id = aws_autoscaling_group.api_asg.id
-#     port = 80
-# }

@@ -10,6 +10,7 @@ resource "aws_launch_template" "api_template" {
 }
 
 resource "aws_autoscaling_group" "api_asg" {
+    name = "apiASG"
     desired_capacity = 1
     min_size = 1
     max_size = 3
