@@ -9,7 +9,7 @@ resource "aws_vpc" "main-vpc" {
 }
 
 resource "aws_subnet" "subnet-1" {
-    vpc_id = aws_vpc.main.id
+    vpc_id = aws_vpc.main-vpc.id
     cidr_block = "10.0.0.0/24"
 
     tags = {
@@ -19,7 +19,7 @@ resource "aws_subnet" "subnet-1" {
 }
 
 resource "aws_lb" "main_lb" {
-    name = "simpleSA_loadbalancer"
+    name = "ssaLB"
     internal = false
     load_balancer_type = "application"
     security_groups = [aws_security_group.allow_http]
@@ -45,7 +45,7 @@ resource "aws_lb_listener" "lb_listener" {
 
 
 resource "aws_lb_target_group" "lb_tg" {
-    name = "simpleSA_lb_tg"
+    name = "ssaLBtg"
     port = "80"
     protocol = "HTTP"
     vpc_id = aws_vpc.main-vpc.id
