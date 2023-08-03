@@ -22,21 +22,6 @@ source "amazon-ebs" "ubuntu" {
   }
   ssh_username = "ubuntu"
 
-  provisioner "file" {
-  source = "../../api/main.py"
-  destination = "/tmp/main.py"
-}
-
-provisioner "shell"{
-  inline = [
-    "sudo apt-get update",
-    "sudo apt-get upgrade -y",
-    "sudo apt-get install python3-pip -y",
-    "sudo pip install flask"
-    ]
-
-}
-
 }
 
 
@@ -46,4 +31,18 @@ build {
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
+  provisioner "file" {
+  source = "../../api/main.py"
+  destination = "/tmp/main.py"
+  }
+
+  provisioner "shell"{
+    inline = [
+      "sudo apt-get update",
+      "sudo apt-get upgrade -y",
+      "sudo apt-get install python3-pip -y",
+      "sudo pip install flask"
+      ]
+
+  }
 }
