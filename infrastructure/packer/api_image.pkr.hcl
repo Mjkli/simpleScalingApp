@@ -32,7 +32,7 @@ build {
     "source.amazon-ebs.ubuntu"
   ]
   provisioner "file" {
-    source = "api/main.py"
+    source = "../../api/main.py"
     destination = "/"
   }
 
