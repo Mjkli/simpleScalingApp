@@ -8,7 +8,7 @@ packer {
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "learn-packer-linux-aws"
+  ami_name      = "ssa-api"
   instance_type = "t2.micro"
   region        = "us-west-1"
   source_ami_filter {
@@ -21,7 +21,24 @@ source "amazon-ebs" "ubuntu" {
     owners      = ["099720109477"]
   }
   ssh_username = "ubuntu"
+
 }
+
+provisioner "file" {
+  source = "../../api/main.py"
+  destination = "/tmp/main.py"
+}
+
+provisioner "shell"{
+  inline = [
+    "sudo apt-get update",
+    "sudo apt-get upgrade -y",
+    "sudo apt-get install python3-pip -y",
+    "sudo pip install flask"
+    ]
+
+}
+
 
 build {
   name = "learn-packer"
