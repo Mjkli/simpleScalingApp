@@ -32,12 +32,13 @@ build {
     "source.amazon-ebs.ubuntu"
   ]
   provisioner "file" {
-  source = "../../api/main.py"
-  destination = "/"
+    source = "api/main.py"
+    destination = "/"
   }
 
   provisioner "shell"{
     inline = [
+      "sleep 30",
       "sudo apt-get update",
       "sudo apt-get upgrade -y",
       "sudo apt-get install python3-pip -y",
