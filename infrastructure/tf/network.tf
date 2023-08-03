@@ -47,6 +47,10 @@ resource "aws_lb" "main_lb" {
         Name = "main_lb"
         project = "simpleScalingApp"
     }
+
+    timeouts {
+      create = "30m"
+    }
 }
 
 resource "aws_lb_listener" "lb_listener" {

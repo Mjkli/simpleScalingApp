@@ -1,5 +1,9 @@
 name: Build Infrastructure
-on: ["push"]
+#on: ["push"]
+on:
+    push:
+        paths:
+            - infrastructure/tf/**
 jobs:
     build:
         name: Check and deploy terraform
