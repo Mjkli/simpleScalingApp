@@ -22,7 +22,7 @@ resource "aws_lb" "main_lb" {
     name = "ssaLB"
     internal = false
     load_balancer_type = "application"
-    security_groups = [aws_security_group.allow_http]
+    security_groups = [aws_security_group.allow_http.id]
     subnets = [aws_subnet.subnet-1.id]
 
     tags = {
