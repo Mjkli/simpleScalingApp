@@ -37,13 +37,13 @@ build {
     destination = "/tmp/main.py"
   }
 
-  // provisioner "shell"{
-  //   inline = [
-  //     "sleep 30",
-  //     "sudo apt-get update",
-  //     "sudo apt-get upgrade -y",
-  //     "sudo apt-get install python3-pip -y",
-  //     "sudo pip install flask"
-  //     ]
-  // }
+  provisioner "shell"{
+    inline = [
+      "sleep 30",
+      "sudo apt-get update",
+      "sudo apt-get upgrade -y",
+      "sudo apt-get install python3-pip -y",
+      "sudo pip install flask"
+      ]
+  }
 }
