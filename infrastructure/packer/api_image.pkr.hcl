@@ -34,7 +34,7 @@ build {
 
   provisioner "file" {
     source = "../../api/main.py"
-    destination = "/tmp/main.py"
+    destination = "/home/ubuntu/main.py"
   }
 
   // provisioner "shell"{
