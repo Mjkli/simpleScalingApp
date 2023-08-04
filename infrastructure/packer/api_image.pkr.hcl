@@ -18,12 +18,12 @@ source "amazon-ebs" "ubuntu" {
   region        = "us-west-1"
   source_ami_filter {
     filters = {
-      name                = "ubuntu/images/hvm-ssd/*ubuntu-jammy-22.04-amd64-server-*"
+      name                = "ssa api *"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
     most_recent = true
-    owners      = ["099720109477"]
+    owners      = ["181066809772"]
   }
   ssh_username = "ubuntu"
 
