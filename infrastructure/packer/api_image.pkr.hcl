@@ -7,8 +7,13 @@ packer {
   }
 }
 
+
+locals{
+  time = formatdate("DDMMMYYhhmm",timestamp())
+}
+
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "ssa-api-1"
+  ami_name      = "ssa api ${local.time}"
   instance_type = "t2.micro"
   region        = "us-west-1"
   source_ami_filter {
@@ -23,7 +28,6 @@ source "amazon-ebs" "ubuntu" {
   ssh_username = "ubuntu"
 
 }
-
 
 
 build {
