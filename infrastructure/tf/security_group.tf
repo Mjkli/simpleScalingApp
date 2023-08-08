@@ -19,7 +19,7 @@ resource "aws_security_group" "allow_http"{
     }
 
     tags = {
-        Name = "allow_http"
+        Name = "allow_8000"
         project = "simpleScalingApp"
     }
 }
