@@ -5,8 +5,8 @@ resource "aws_security_group" "allow_http"{
 
     ingress {
         description = "TCP from public"
-        from_port = 8000
-        to_port = 8000
+        from_port = 80
+        to_port = 80
         protocol = "TCP"
         cidr_blocks = ["0.0.0.0/0"]
     }
@@ -19,7 +19,7 @@ resource "aws_security_group" "allow_http"{
     }
 
     tags = {
-        Name = "allow_8000"
+        Name = "allow_http"
         project = "simpleScalingApp"
     }
 }
@@ -31,8 +31,8 @@ resource "aws_security_group" "allow_lb" {
 
     ingress {
         description = "HTTP from alb"
-        from_port = 80
-        to_port = 80
+        from_port = 8000
+        to_port = 8000
         protocol = "TCP"
         security_groups = [aws_security_group.allow_http.id]
     }
