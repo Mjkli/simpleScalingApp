@@ -2,10 +2,8 @@
 data "aws_ami" "image" {
   most_recent = true
   owners = ["181066809772"]
-  filter {
-      name = "ssa api *"
-      values = ["Available"]
-  }
+  name_regex = "ssa api *"
+
 }
 
 
