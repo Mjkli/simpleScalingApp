@@ -1,6 +1,19 @@
+
+data "aws_ami" "image" {
+  most_recent = true
+  owners = ["181066809772"]
+  filter {
+      name                = "ssa api *"
+      root-device-type    = "ebs"
+      virtualization-type = "hvm"
+  }
+}
+
+
+
 resource "aws_launch_template" "api_template" {
     name_prefix = "saa-api"
-    image_id = "ami-04d1dcfb793f6fa37"
+    image_id = "${data.aws_ami.image.id}"
     instance_type = "t2.micro"
 
     network_interfaces {
