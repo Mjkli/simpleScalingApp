@@ -19,7 +19,7 @@ jobs:
 
     image:
         needs: changes
-        if: ${{ needs.changes.outputs.src == 'true' }} || ${{ needs.changes.outputs.image == 'true'}}
+        if: (needs.changes.outputs.image == 'true' || needs.changes.outputs.src == 'true')
         name: Update ami image
         runs-on: ubuntu-latest
         container: mjkli/packer-aws:latest # Alpine image with packer and aws cli on it
@@ -44,7 +44,6 @@ jobs:
               working-directory: infrastructure/packer
 
     infra:
-        needs: image
         name: Check and deploy terraform
         runs-on: ubuntu-latest
         container: mjkli/terraform-aws:latest # Alpine image with terraform and aws cli on it
