@@ -34,7 +34,7 @@ resource "aws_security_group" "allow_lb" {
         from_port = 8000
         to_port = 8000
         protocol = "TCP"
-        security_groups = [aws_security_group.allow_http.id]
+        cidr_blocks = ["${aws_vpc.main-vpc.cidr_block}"]
     }
 
     egress {
