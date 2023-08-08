@@ -5,7 +5,6 @@ jobs:
       runs-on: ubuntu-latest
       outputs:
         src: ${{ steps.changes.outputs.src }}
-        infra: ${{ steps.changes.outputs.infra }}
         image: ${{ steps.changes.outputs.image }}
       steps:
         - uses: actions/checkout@v3
@@ -15,8 +14,6 @@ jobs:
               filters: |
                 src:
                   - 'api/**'
-                infra:
-                  - 'infrastructure/tf/**'
                 image:
                   - 'infrastructure/packer/**'
 
