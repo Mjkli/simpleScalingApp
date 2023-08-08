@@ -1,12 +1,52 @@
 name: Build Infrastructure
-#on: ["push"]
-on:
-    push:
-        paths:
-            - infrastructure/tf/**
-            - .github/workflows/build-infra.yml
+on: ["push"]
 jobs:
-    build:
+    changes:
+      runs-on: ubuntu-latest
+      outputs:
+        src: ${{ steps.changes.outputs.src }}
+        infra: ${{ steps.changes.outputs.infra }}
+        image: ${{ steps.changes.outputs.image }}
+      steps:
+        - uses: actions/checkout@v3
+        - uses: dorny/paths-filter@v2
+          id: code_changes
+          with:
+              filters: |
+                src:
+                  - 'api/**'
+                infra:
+                  - 'infrastructure/tf/**'
+                image:
+                  - 'infrastructure/packer/**'
+
+    image:
+        needs: changes
+        if: ${{ needs.changes.outputs.src == 'true' }} || ${{ needs.changes.outputs.image == 'true'}}
+        name: Check and deploy terraform
+        runs-on: ubuntu-latest
+        container: mjkli/packer-aws:latest # Alpine image with terraform and aws cli on it
+        env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_DEFAULT_REGION: "us-west-1"
+        steps:
+            - name: Checkout the repo to the runner
+              uses: actions/checkout@v3
+
+            - name: packer init
+              run: packer init api_image.pkr.hcl
+              working-directory: infrastructure/packer
+
+            - name: packer validate
+              run: packer validate .
+              working-directory: infrastructure/packer
+
+            - name: packer build
+              run: packer build api_image.pkr.hcl
+              working-directory: infrastructure/packer
+
+    infra:
         name: Check and deploy terraform
         runs-on: ubuntu-latest
         container: mjkli/terraform-aws:latest # Alpine image with terraform and aws cli on it
