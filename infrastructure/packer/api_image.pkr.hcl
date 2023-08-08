@@ -47,7 +47,7 @@ build {
       "sudo apt-get update",
       "sudo apt-get upgrade -y",
       "sudo apt-get install python3-pip -y",
-      "sudo pip install flask"
+      "sudo pip install fastapi uvicorn"
       ]
   }
 }

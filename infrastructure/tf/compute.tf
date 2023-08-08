@@ -7,6 +7,8 @@ resource "aws_launch_template" "api_template" {
       associate_public_ip_address = false
     }
 
+    user_data = filebase64("${path.module}/api.sh")
+
 }
 
 resource "aws_autoscaling_group" "api_asg" {
