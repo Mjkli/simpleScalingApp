@@ -13,6 +13,7 @@ resource "aws_launch_template" "api_template" {
     image_id = "${data.aws_ami.image.id}"
     instance_type = "t2.micro"
     update_default_version = true
+    key_name = "main"
 
 
     network_interfaces {
