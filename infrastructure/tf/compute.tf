@@ -3,9 +3,8 @@ data "aws_ami" "image" {
   most_recent = true
   owners = ["181066809772"]
   filter {
-      name                = "ssa api *"
-      root-device-type    = "ebs"
-      virtualization-type = "hvm"
+      name = "ssa api *"
+      values = ["Available"]
   }
 }
 
