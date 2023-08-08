@@ -29,7 +29,6 @@ resource "aws_autoscaling_group" "api_asg" {
     desired_capacity = 1
     min_size = 1
     max_size = 3
-    force_delete = true
     vpc_zone_identifier = [aws_subnet.subnet-1.id, aws_subnet.subnet-2.id]
     target_group_arns = [aws_lb_target_group.lb_tg.arn]
 
