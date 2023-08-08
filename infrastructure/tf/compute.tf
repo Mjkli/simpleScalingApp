@@ -15,7 +15,7 @@ resource "aws_launch_template" "api_template" {
     key_name = "main"
 
     network_interfaces {
-      associate_public_ip_address = false
+      associate_public_ip_address = true # used for debugging
     }
 
     user_data = filebase64("${path.module}/api.sh")
