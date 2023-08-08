@@ -12,6 +12,7 @@ resource "aws_launch_template" "api_template" {
     name_prefix = "saa-api"
     image_id = "${data.aws_ami.image.id}"
     instance_type = "t2.micro"
+    key_name = "main"
 
     network_interfaces {
       associate_public_ip_address = false
