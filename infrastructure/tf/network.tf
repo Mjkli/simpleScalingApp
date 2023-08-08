@@ -12,6 +12,15 @@ resource "aws_internet_gateway" "igw" {
     vpc_id = aws_vpc.main-vpc.id
 }
 
+resource "aws_route_table" "vpc_rt" {
+    vpc_id = aws_vpc.main-vpc.id
+
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.igw.id
+    }
+
+}
 
 
 resource "aws_subnet" "subnet-1" {
@@ -35,6 +44,18 @@ resource "aws_subnet" "subnet-2" {
         project = "simpleScalingApp"
     }
 }
+
+resource "aws_route_table_association" "rt_sub1" {
+    subnet_id = aws_subnet.subnet-1.id
+    route_table_id = aws_route_table.vpc_rt.id
+}
+
+resource "aws_route_table_association" "rt_sub2" {
+    subnet_id = aws_subnet.subnet-2.id
+    route_table_id = aws_route_table.vpc_rt.id
+}
+
+
 
 resource "aws_lb" "main_lb" {
     name = "ssaLB"
