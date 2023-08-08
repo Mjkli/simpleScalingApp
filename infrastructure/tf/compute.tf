@@ -22,6 +22,10 @@ resource "aws_autoscaling_group" "api_asg" {
         id = aws_launch_template.api_template.id
         version = "$Latest"
     }
+
+    lifecycle {
+      create_before_destroy = true
+    }
 }
 
 resource "aws_autoscaling_attachment" "asg_attach" {
