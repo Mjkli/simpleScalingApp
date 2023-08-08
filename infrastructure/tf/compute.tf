@@ -18,6 +18,7 @@ resource "aws_launch_template" "api_template" {
 
     network_interfaces {
       associate_public_ip_address = false
+      security_groups = ["${aws_security_group.allow_lb.id}"]
     }
 
     user_data = filebase64("${path.module}/api.sh")

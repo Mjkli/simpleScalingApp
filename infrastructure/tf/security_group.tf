@@ -1,6 +1,6 @@
 resource "aws_security_group" "allow_http"{
-    name = "allow_8000"
-    description = "Allows public 8000 access to the loadbalancer"
+    name = "allow_80"
+    description = "Allows public 80 access to the loadbalancer"
     vpc_id = aws_vpc.main-vpc.id
 
     ingress {
@@ -45,7 +45,7 @@ resource "aws_security_group" "allow_lb" {
     }
 
     tags = {
-        Name = "allow_http"
+        Name = "allow_lb"
         project = "simpleScalingApp"
     }
 
