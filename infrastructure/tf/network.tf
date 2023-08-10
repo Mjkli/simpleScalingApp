@@ -29,12 +29,15 @@ resource "aws_route_table" "private_rt" {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_nat_gateway.asg_ngw.id
     }
+}
 
+resource "aws_eip" "nat_gw_ip" {
+    domain = "vpc"
 }
 
 resource "aws_nat_gateway" "asg_ngw" {
     subnet_id = aws_subnet.public-subnet-1.id
-    connectivity_type = "private"
+    allocation_id = aws_eip.nat_gw_ip.id
 }
 
 resource "aws_subnet" "public-subnet-1"{
