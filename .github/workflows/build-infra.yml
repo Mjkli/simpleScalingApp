@@ -19,7 +19,7 @@ jobs:
 
     image:
         needs: changes
-        if: (needs.changes.outputs.image == 'true' || needs.changes.outputs.src == 'true')
+        if: needs.changes.outputs.image == 'true'
         name: Update ami image
         runs-on: ubuntu-latest
         container: mjkli/packer-aws:latest # Alpine image with packer and aws cli on it
@@ -83,5 +83,5 @@ jobs:
               run: terraform apply -auto-approve -input=false
               working-directory: infrastructure/tf
 
-            - name: wait 2 min for runner to apply
-              run: sleep 120
+            - name: wait 1 min for runner to apply
+              run: sleep 60
