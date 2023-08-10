@@ -34,6 +34,7 @@ resource "aws_route_table" "private_rt" {
 
 resource "aws_nat_gateway" "asg_ngw" {
     subnet_id = aws_subnet.public-subnet-1.id
+    connectivity_type = "private"
 }
 
 resource "aws_subnet" "public-subnet-1"{
