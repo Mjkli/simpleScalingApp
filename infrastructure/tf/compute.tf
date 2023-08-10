@@ -43,6 +43,7 @@ resource "aws_autoscaling_group" "api_asg" {
     }
 }
 
+# This is how the load balancer sends traffic to proper ec2 instances
 resource "aws_autoscaling_attachment" "asg_attach" {
     autoscaling_group_name = aws_autoscaling_group.api_asg.name
     lb_target_group_arn = aws_lb_target_group.lb_tg.arn

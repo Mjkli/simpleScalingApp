@@ -51,9 +51,20 @@ resource "aws_subnet" "public-subnet-1"{
     }
 }
 
-resource "aws_subnet" "private-subnet-1" {
+resource "aws_subnet" "public-subnet-2"{
     vpc_id = aws_vpc.main-vpc.id
     cidr_block = "10.0.1.0/24"
+    availability_zone = "us-west-1a"
+
+    tags = {
+        Name = "public-subnet-1"
+        project = "simpleScalingApp"
+    }
+}
+
+resource "aws_subnet" "private-subnet-1" {
+    vpc_id = aws_vpc.main-vpc.id
+    cidr_block = "10.0.2.0/24"
     availability_zone = "us-west-1a"
 
     tags = {
@@ -64,7 +75,7 @@ resource "aws_subnet" "private-subnet-1" {
 
 resource "aws_subnet" "private-subnet-2" {
     vpc_id = aws_vpc.main-vpc.id
-    cidr_block = "10.0.2.0/24"
+    cidr_block = "10.0.3.0/24"
     availability_zone = "us-west-1b"
 
     tags = {
@@ -75,6 +86,11 @@ resource "aws_subnet" "private-subnet-2" {
 
 resource "aws_route_table_association" "rt_public_sub1" {
     subnet_id = aws_subnet.public-subnet-1.id
+    route_table_id = aws_route_table.vpc_rt.id
+}
+
+resource "aws_route_table_association" "rt_public_sub2" {
+    subnet_id = aws_subnet.public-subnet-2.id
     route_table_id = aws_route_table.vpc_rt.id
 }
 
@@ -93,7 +109,7 @@ resource "aws_lb" "main_lb" {
     internal = false
     load_balancer_type = "application"
     security_groups = [aws_security_group.allow_http.id]
-    subnets = [aws_subnet.private-subnet-1.id, aws_subnet.private-subnet-2.id]
+    subnets = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-2.id]
 
     tags = {
         Name = "main_lb"
