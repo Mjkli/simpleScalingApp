@@ -45,6 +45,8 @@ jobs:
 
     infra:
         name: Check and deploy terraform
+        needs: [image]
+        if: ${{ always() }}
         runs-on: ubuntu-latest
         container: mjkli/terraform-aws:latest # Alpine image with terraform and aws cli on it
         env:
