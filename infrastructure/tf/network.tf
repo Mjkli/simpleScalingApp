@@ -22,47 +22,74 @@ resource "aws_route_table" "vpc_rt" {
 
 }
 
+resource "aws_route_table" "private_rt" {
+    vpc_id = aws_vpc.main-vpc.id
 
-resource "aws_subnet" "subnet-1" {
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_nat_gateway.asg_ngw.id
+    }
+
+}
+
+resource "aws_nat_gateway" "asg_ngw" {
+    subnet_id = aws_subnet.public-subnet-1.id
+}
+
+resource "aws_subnet" "public-subnet-1"{
     vpc_id = aws_vpc.main-vpc.id
     cidr_block = "10.0.0.0/24"
     availability_zone = "us-west-1a"
 
     tags = {
-        Name = "subnet-1"
+        Name = "public-subnet-1"
         project = "simpleScalingApp"
     }
 }
 
-resource "aws_subnet" "subnet-2" {
+resource "aws_subnet" "private-subnet-1" {
     vpc_id = aws_vpc.main-vpc.id
     cidr_block = "10.0.1.0/24"
+    availability_zone = "us-west-1a"
+
+    tags = {
+        Name = "private-subnet-1"
+        project = "simpleScalingApp"
+    }
+}
+
+resource "aws_subnet" "private-subnet-2" {
+    vpc_id = aws_vpc.main-vpc.id
+    cidr_block = "10.0.2.0/24"
     availability_zone = "us-west-1b"
 
     tags = {
-        Name = "subnet-2"
+        Name = "private-subnet-2"
         project = "simpleScalingApp"
     }
 }
 
-resource "aws_route_table_association" "rt_sub1" {
-    subnet_id = aws_subnet.subnet-1.id
+resource "aws_route_table_association" "rt_public_sub1" {
+    subnet_id = aws_subnet.public-subnet-1.id
     route_table_id = aws_route_table.vpc_rt.id
 }
 
-resource "aws_route_table_association" "rt_sub2" {
-    subnet_id = aws_subnet.subnet-2.id
-    route_table_id = aws_route_table.vpc_rt.id
+resource "aws_route_table_association" "rt_private_sub1" {
+    subnet_id = aws_subnet.private-subnet-1.id
+    route_table_id = aws_route_table.private_rt.id
 }
 
-
+resource "aws_route_table_association" "rt_private_sub2" {
+    subnet_id = aws_subnet.private-subnet-2.id
+    route_table_id = aws_route_table.private_rt.id
+}
 
 resource "aws_lb" "main_lb" {
     name = "ssaLB"
     internal = false
     load_balancer_type = "application"
     security_groups = [aws_security_group.allow_http.id]
-    subnets = [aws_subnet.subnet-1.id, aws_subnet.subnet-2.id]
+    subnets = [aws_subnet.private-subnet-1.id, aws_subnet.private-subnet-2.id]
 
     tags = {
         Name = "main_lb"
