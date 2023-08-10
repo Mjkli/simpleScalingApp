@@ -8,3 +8,5 @@ def read_root():
 
     current_time = now.strftime("%H:%M:%S")
     return current_time
+
+
