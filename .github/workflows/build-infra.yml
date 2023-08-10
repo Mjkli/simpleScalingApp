@@ -4,12 +4,12 @@ jobs:
     changes:
       runs-on: ubuntu-latest
       outputs:
-        src: ${{ steps.changes.outputs.src }}
-        image: ${{ steps.changes.outputs.image }}
+        src: ${{ steps.filter.outputs.src }}
+        image: ${{ steps.filter.outputs.image }}
       steps:
         - uses: actions/checkout@v3
         - uses: dorny/paths-filter@v2
-          id: code_changes
+          id: filter
           with:
               filters: |
                 src:
