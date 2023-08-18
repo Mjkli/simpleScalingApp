@@ -4,7 +4,7 @@ The app will be placed in an auto-scaling group with t2.micro ec2 machines. And 
 This is a good demonstration for basic high availablity.
 
 ## Diagram
-![alt text](https://github.com/Mjkli/simpleScalingApp/blob/main/simpleScalingApp.jpg
+![Alt text](https://github.com/Mjkli/simpleScalingApp/blob/main/simpleScalingApp.jpg)
 
 ## Cloudfront example
 There is also a static webpage hosting that will be stored on s3 and distributed with cloudfront when going to the website will show your current time.
