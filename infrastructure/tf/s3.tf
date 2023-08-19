@@ -23,7 +23,7 @@ resource "aws_s3_bucket_website_configuration" "example" {
     bucket = aws_s3_bucket.ssa-web.id
 
     index_document {
-        suffix = "index.html"
+        suffix = "main.html"
     }
 }
 
