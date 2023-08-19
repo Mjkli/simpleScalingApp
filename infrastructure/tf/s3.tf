@@ -51,11 +51,11 @@ resource "aws_s3_bucket_policy" "allow_access_from_public"{
 }
 
 resource "aws_s3_object" "webpages" {
-  for_each = fileset("web/","*")
+  for_each = fileset("../../web/","*")
   bucket = aws_s3_bucket.ssa-web.id
   key = each.value
-  source = "web/${each.value}"
-  etag = filemd5("web/${each.value}")
+  source = "../../web/${each.value}"
+  etag = filemd5("../../web/${each.value}")
   content_type = "text/html"
 
 }
