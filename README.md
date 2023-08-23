@@ -3,11 +3,14 @@ Project showing the use of AWS horizontal scaling with an application load balan
 The app will be placed in an auto-scaling group with t2.micro ec2 machines. And a loadbalancer will service traffic.
 This is a good demonstration for basic high availablity.
 
-## Diagram
+## api-Diagram
 ![Alt text](https://github.com/Mjkli/simpleScalingApp/blob/main/simpleScalingApp.jpg)
 
 ## Cloudfront example
 There is also a static webpage hosting that will be stored on s3 and distributed with cloudfront when going to the website will show your current time.
+
+## Cloudfront example
+![Alt text](https://github.com/Mjkli/simpleScalingApp/blob/main/cloudfront.png)
 
 ## Image versioning
 Since auto scaling groups are able to scale new images using ami-s. It is good practice to create an image so that your application can be spun up quickly.
