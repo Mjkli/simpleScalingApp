@@ -9,7 +9,7 @@ This is a good demonstration for basic high availablity.
 ## Cloudfront example
 There is also a static webpage hosting that will be stored on s3 and distributed with cloudfront when going to the website will show your current time.
 
-## Cloudfront example
+## Cloudfront diagram
 ![Alt text](https://github.com/Mjkli/simpleScalingApp/blob/main/cloudfront.png)
 
 ## Image versioning
