@@ -21,6 +21,7 @@ resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
 
 data "aws_iam_policy_document" "allow_cloudfront" {
     statement {
+      effect = "Allow"
       principals {
         type = "Service"
         identifiers = ["cloudfront.amazonaws.com"]

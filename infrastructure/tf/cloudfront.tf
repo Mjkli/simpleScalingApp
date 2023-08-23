@@ -6,7 +6,7 @@ resource "aws_cloudfront_origin_access_control" "cf_s3_oac" {
 }
 
 resource "aws_cloudfront_distribution" "s3_distrib" {
-    default_root_object = "index.html"
+    default_root_object = "main.html"
     enabled = true
 
     origin {
